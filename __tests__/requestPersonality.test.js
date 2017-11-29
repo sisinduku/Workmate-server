@@ -12,11 +12,11 @@ const mockFetchToWatson = (input) => {
 }
 
 describe('Testing Search personality', () => {
-  test('Request should give personality object', async () => {
+  test('Response should give personality object', async () => {
     const data = await requestPersonality(mockFetchToWatson, text)
     expect(data).toEqual(insight)
   })
-  test('Request should give error length', async () => {
+  test('Response should give error length', async () => {
     const data = await requestPersonality(mockFetchToWatson, 'coba salah aja')
     expect(data).toEqual({error: 'words count must >= 100'})
   })

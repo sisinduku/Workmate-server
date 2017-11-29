@@ -12,6 +12,7 @@
   "devDependencies": {
     "codeclimate-test-reporter": "^0.5.0",
     "jest": "^21.2.1",
+    "mockingoose": "^2.4.0",
     "supertest": "^3.0.0"
   },
   "scripts": {
