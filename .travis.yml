@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+- '8'
+deploy:
+  provider: gae
+  keyfile: gcp-learn-7e72e051fe21.json
+  project: gcp-learn-184002
+before_install:
+- openssl aes-256-cbc -K $encrypted_de99cca9bd3d_key -iv $encrypted_de99cca9bd3d_iv
+  -in gcp-learn-7e72e051fe21.json.enc -out gcp-learn-7e72e051fe21.json -d
