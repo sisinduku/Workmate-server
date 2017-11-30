@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1511968657845" clover="3.2.0">
-  <project timestamp="1511968657845" name="All files">
+<coverage generated="1512005776818" clover="3.2.0">
+  <project timestamp="1512005776818" name="All files">
     <metrics statements="31" coveredstatements="28" conditionals="2" coveredconditionals="1" methods="7" coveredmethods="5" elements="40" coveredelements="34" complexity="0" loc="31" ncloc="31" packages="4" files="4" classes="4">
       <package name="workmate-server">
         <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>

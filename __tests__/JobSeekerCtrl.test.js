@@ -29,3 +29,24 @@ describe('POST /job_seekers', () => {
     }
   })
 })
+
+describe('GET /job_seekers/:id', () => {
+    const id="5a1ebb2c5769a249f424107e"
+  test('response status get profile by id job seeker', async () => {
+    try {
+      const response = await request(app).get(`/job_seekers/${id}`)
+      expect(response.statusCode).toBe(200);
+      expect(response.body.message).toContain("profile job seeker founded")
+    } catch (e) {
+      console.log(e);
+    }
+  })
+  test('response object data get profile by id job seeker', async () => {
+    try {
+      const response = await request(app).get(`/job_seekers/${id}`)
+      expect(response.body.data).toMatchObject({_id:id})
+    } catch (e) {
+      console.log(e);
+    }
+  })
+})

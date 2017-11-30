@@ -3,6 +3,6 @@ const router = express.Router()
 const JobSeekerCtrl = require('../controller/JobSeekerCtrl')
 
 router.post('/', JobSeekerCtrl.create)
-
+router.get('/:id', JobSeekerCtrl.findById)
 
 module.exports = router
