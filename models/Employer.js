@@ -17,8 +17,7 @@ let employerSchema = new Schema({
   company: String,
   location: String,
   password: {
-    type: String,
-    required: true
+    type: String
   },
   createdAt: {
     type: Date,
@@ -50,4 +49,4 @@ employerSchema.pre('findOneAndUpdate', function(next) {
 })
 
 
-module.exports = mongoose.model('Other', employerSchema)
+module.exports = mongoose.model('Employer', employerSchema)
