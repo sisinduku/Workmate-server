@@ -1,5 +1,15 @@
 const app = require('../app')
 const request = require('supertest')
+const fs = require('fs');
+let text = fs.readFileSync('./__mockData__/profile.txt', 'utf-8')
+text = text.replace(/\r?\n|\r/g, '')
+
+jest.mock('watson-developer-cloud/personality-insights/v3', () => jest.fn())
+const PersonalityInsightsV3 = require('watson-developer-cloud/personality-insights/v3')
+const insight = require('../__mockData__/user1.json');
+PersonalityInsightsV3.mockImplementation(() => ({
+  profile: jest.fn((obj, cb) => cb(null, insight))
+}))
 
 var id=""
 var id2=""
@@ -8,7 +18,7 @@ const profile={
   "location" : "bogor",
   "education" : ["bachelor"],
   "skills" : ["can remember many thing"],
-  "executive_summary" : "im a hard worker",
+  "executive_summary" : text,
   "personality_insight" : "",
   "password": "a"
 }
@@ -17,7 +27,7 @@ const profileEdit={
   "location" : "jakarta",
   "education" : ["bachelor"],
   "skills" : ["can remember many thing"],
-  "executive_summary" : "im a hard worker",
+  "executive_summary" : text,
   "personality_insight" : "",
   "password": "a"
 }
@@ -26,6 +36,8 @@ describe('POST /job_seekers', () => {
   test('response status create profile job seeker', async () => {
     try {
       const response = await request(app).post('/job_seekers').send(profile)
+      // console.log('ini response', response.body.data);
+
       id=response.body.data._id
       expect(response.statusCode).toBe(200);
       expect(response.body.message).toContain("profile job seeker created succesfully")
@@ -35,21 +47,21 @@ describe('POST /job_seekers', () => {
   })
   test('response object data create profile job seeker', async () => {
     try {
+      // console.log('ini profile',profile);
       const response = await request(app).post('/job_seekers').send(profile)
+      let newInsight = JSON.stringify(insight)
+      // console.log('ini response 2', response.body);
       id2=response.body.data._id
+      profile.personality_insight=newInsight
+      profileEdit.personality_insight=newInsight
+      profile.password=response.body.data.password
+      profileEdit.password=response.body.data.password
+      expect(response.body.data.personality_insight).toEqual(newInsight)
       expect(response.body.data).toMatchObject(profile)
     } catch (e) {
       console.log(e);
     }
   })
-  // test('the response data create profile job seeker with an eror', async () => {
-  //   try {
-  //     const response = await request(app).post('/job_seekers')
-  //   } catch (e) {
-  //     console.log(e);
-  //     expect(response.body.data).toMatchObject(profile)
-  //   }
-  // })
 })
 
 describe('GET /job_seekers/:id', () => {

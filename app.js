@@ -11,6 +11,6 @@ app.use(bodyParser.urlencoded({
 
 require('dotenv').config()
 const job_seeker = require('./routes/JobSeekerRoute');
-app.use('/job_seekers/', job_seeker)
+app.use('/job_seekers', job_seeker)
 
 module.exports = app

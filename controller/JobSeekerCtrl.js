@@ -1,12 +1,24 @@
-const job_seeker = require('../models/JobSeeker');
+const JobSeeker = require('../models/JobSeeker');
+const requestPersonality = require('../lib/requestPersonality');
+const crypto = require('crypto')
 
-class JobSeeker {
-  static create(req,res){
-    job_seeker.create(req.body)
-    .then(dataJobSeeker => {
-      res.status(200).json({
-        message:`profile job seeker created succesfully`,
-        data:dataJobSeeker
+class JobSeekerCtrl {
+  static create(req,res,next){
+    let newPass=crypto.createHash('md5').update(req.body.password).digest('hex');
+    req.body.password=newPass
+
+    requestPersonality(req.body.executive_summary)
+    .then(personality => {
+      req.body.personality_insight = JSON.stringify(personality)
+      JobSeeker.create(req.body)
+      .then(dataJobSeeker => {
+        res.status(200).json({
+          message:`profile job seeker created succesfully`,
+          data:dataJobSeeker
+        })
+      })
+      .catch(err => {
+        console.log(err);
       })
     })
     .catch(err => {
@@ -14,7 +26,7 @@ class JobSeeker {
     })
   }
   static findById(req,res){
-    job_seeker.findById(req.params.id)
+    JobSeeker.findById(req.params.id)
     .then(dataJobSeeker => {
       res.status(200).json({
         message:`profile job seeker founded`,
@@ -26,7 +38,7 @@ class JobSeeker {
     })
   }
   static update(req,res){
-    job_seeker.findOneAndUpdate({
+    JobSeeker.findOneAndUpdate({
       _id:req.params.id
     },req.body
     )
@@ -41,7 +53,7 @@ class JobSeeker {
     })
   }
   static delete(req,res){
-    job_seeker.findOneAndRemove({
+    JobSeeker.findOneAndRemove({
       _id:req.params.id
     })
     .then(dataJobSeeker => {
@@ -56,4 +68,4 @@ class JobSeeker {
   }
 }
 
-module.exports = JobSeeker
+module.exports = JobSeekerCtrl
