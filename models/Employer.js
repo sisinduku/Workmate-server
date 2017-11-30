@@ -1,4 +1,6 @@
 const mongoose = require('mongoose')
+const crypto = require('crypto')
+
 const Schema = mongoose.Schema
 mongoose.Promise = global.Promise
 mongoose.connection.openUri(`${process.env.APPDB}_${process.env.NODE_ENV}_db`, (err) => {
@@ -29,7 +31,7 @@ let employerSchema = new Schema({
 })
 
 employerSchema.pre('save', function (next) {
-  // Hash inputed password here
+  this.password = crypto.createHash('md5').update(this.password).digest('hex')
   next()
 })
 
