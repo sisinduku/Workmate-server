@@ -1,7 +1,7 @@
 const fs = require('fs')
 
 const similarityPersonality = require('../lib/similarityPersonality')
-const insight = require('../__mockData__/user1.json');
+const insight = require('../__mockData__/user1.json')
 let text = fs.readFileSync('./__mockData__/profile.txt', 'utf-8')
 text = text.replace(/\r?\n|\r/g, '')
 

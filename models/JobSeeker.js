@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+mongoose.Promise = global.Promise
 mongoose.connection.openUri(`${process.env.APPDB}_${process.env.NODE_ENV}_db`, (err) => {
   if (err) {
     console.log(err);
