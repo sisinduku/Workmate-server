@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">36.36% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>6/8</span>
+        <span class='fraction'>4/11</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,18 +30,18 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">22.22% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>4/6</span>
+        <span class='fraction'>2/9</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75% </span>
+        <span class="strong">36.36% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>6/8</span>
+        <span class='fraction'>4/11</span>
       </div>
     </div>
   </div>
-  <div class='status-line medium'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -73,13 +73,40 @@
 28
 29
 30
-31</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -90,6 +117,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -106,10 +136,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const job_seeker = require('../models/JobSeeker');
 &nbsp;
 class JobSeeker {
-  static create(req,res){
-    job_seeker.create(req.body)
-    .then(dataJobSeeker =&gt; {
-      res.status(200).json({
+<span class="fstat-no" title="function not covered" >  st</span>atic create(req,res){
+<span class="cstat-no" title="statement not covered" >    job_seeker.create(req.body)</span>
+    .then(<span class="fstat-no" title="function not covered" >da</span>taJobSeeker =&gt; {
+<span class="cstat-no" title="statement not covered" >      res.status(200).json({</span>
         message:`profile job seeker created succesfully`,
         data:dataJobSeeker
       })
@@ -118,11 +148,26 @@ class JobSeeker {
 <span class="cstat-no" title="statement not covered" >      console.log(err);</span>
     })
   }
-  static findById(req,res){
-    job_seeker.findById(req.params.id)
+<span class="fstat-no" title="function not covered" >  st</span>atic findById(req,res){
+<span class="cstat-no" title="statement not covered" >    job_seeker.findById(req.params.id)</span>
+    .then(<span class="fstat-no" title="function not covered" >da</span>taJobSeeker =&gt; {
+<span class="cstat-no" title="statement not covered" >      res.status(200).json({</span>
+        message:`profile job seeker founded`,
+        data:dataJobSeeker
+      })
+    })
+    .catch(<span class="fstat-no" title="function not covered" >er</span>r =&gt; {
+<span class="cstat-no" title="statement not covered" >      console.log(err);</span>
+    })
+  }
+  static update(req,res){
+    job_seeker.findOneAndUpdate({
+      _id:req.params.id
+    },req.body
+    )
     .then(dataJobSeeker =&gt; {
       res.status(200).json({
-        message:`profile job seeker founded`,
+        message:`profile job seeker updated succesfully`,
         data:dataJobSeeker
       })
     })
@@ -139,7 +184,7 @@ module.exports = JobSeeker
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Nov 30 2017 08:36:16 GMT+0700 (WIB)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Nov 30 2017 09:07:54 GMT+0700 (WIB)
 </div>
 </div>
 <script src="../../prettify.js"></script>

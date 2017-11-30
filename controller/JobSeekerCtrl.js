@@ -25,6 +25,21 @@ class JobSeeker {
       console.log(err);
     })
   }
+  static update(req,res){
+    job_seeker.findOneAndUpdate({
+      _id:req.params.id
+    },req.body
+    )
+    .then(dataJobSeeker => {
+      res.status(200).json({
+        message:`profile job seeker updated succesfully`,
+        data:dataJobSeeker
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 }
 
 module.exports = JobSeeker

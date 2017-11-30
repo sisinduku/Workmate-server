@@ -4,5 +4,6 @@ const JobSeekerCtrl = require('../controller/JobSeekerCtrl')
 
 router.post('/', JobSeekerCtrl.create)
 router.get('/:id', JobSeekerCtrl.findById)
+router.put('/:id', JobSeekerCtrl.update)
 
 module.exports = router

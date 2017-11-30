@@ -31,7 +31,7 @@ describe('POST /job_seekers', () => {
 })
 
 describe('GET /job_seekers/:id', () => {
-    const id="5a1ebb2c5769a249f424107e"
+  const id="5a1ebb2c5769a249f424107e"
   test('response status get profile by id job seeker', async () => {
     try {
       const response = await request(app).get(`/job_seekers/${id}`)
@@ -44,6 +44,36 @@ describe('GET /job_seekers/:id', () => {
   test('response object data get profile by id job seeker', async () => {
     try {
       const response = await request(app).get(`/job_seekers/${id}`)
+      expect(response.body.data).toMatchObject({_id:id})
+    } catch (e) {
+      console.log(e);
+    }
+  })
+})
+
+describe('PUT /job_seekers/:id', () => {
+  const id="5a1ebb2c5769a249f424107e"
+  const profile={
+    "name" : "zaim malak",
+    "location" : "jakarta",
+    "education" : ["bachelor"],
+    "skills" : ["can remember many thing"],
+    "executive_summary" : "im a hard worker",
+    "personality_insight" : "",
+    "password": "a"
+  }
+  test('response status put profile by id job seeker', async () => {
+    try {
+      const response = await request(app).put(`/job_seekers/${id}`).send(profile)
+      expect(response.statusCode).toBe(200);
+      expect(response.body.message).toContain("profile job seeker updated succesfully")
+    } catch (e) {
+      console.log(e);
+    }
+  })
+  test('response object data put profile by id job seeker', async () => {
+    try {
+      const response = await request(app).put(`/job_seekers/${id}`).send(profile)
       expect(response.body.data).toMatchObject({_id:id})
     } catch (e) {
       console.log(e);
