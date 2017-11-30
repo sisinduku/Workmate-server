@@ -40,6 +40,20 @@ class JobSeeker {
       console.log(err);
     })
   }
+  static delete(req,res){
+    job_seeker.findOneAndRemove({
+      _id:req.params.id
+    })
+    .then(dataJobSeeker => {
+      res.status(200).json({
+        message:`profile job seeker deleted succesfully`,
+        data:dataJobSeeker
+      })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 }
 
 module.exports = JobSeeker

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-mongoose.connection.openUri(`${process.env.app_db}`, (err) => {
+mongoose.connection.openUri(`${process.env.APPDB}_${process.env.NODE_ENV}_db`, (err) => {
   if (err) {
     console.log(err);
   }
