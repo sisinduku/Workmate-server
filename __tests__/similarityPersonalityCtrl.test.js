@@ -14,8 +14,8 @@ const user7 = require('../__mockData__/user7.json')
 const user8 = require('../__mockData__/user8.json')
 
 describe('Testing Search Similarity Controller', () => {
-  beforeAll(() => {
-    JobSeeker.insertMany([
+  beforeAll(async () => {
+    await JobSeeker.insertMany([
       {
         name: 'Satria Saputra',
         location: 'Jakarta',
