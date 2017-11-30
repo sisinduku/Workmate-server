@@ -6,16 +6,18 @@
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "graphql": "^0.11.7",
-    "mongoose": "^4.13.5"
+    "mongoose": "^4.13.5",
+    "watson-developer-cloud": "^2.42.0"
   },
   "devDependencies": {
     "codeclimate-test-reporter": "^0.5.0",
     "jest": "^21.2.1",
+    "mockingoose": "^2.4.0",
     "supertest": "^3.0.0"
   },
   "scripts": {
     "start": "PORT=80 NODE_ENV=prod node index.js",
     "dev": "NODE_ENV=dev nodemon index.js",
-    "test": "NODE_ENV=test jest --coverage"
+    "test": "APPDB=mongodb://localhost/workmate NODE_ENV=test jest --coverage --forceExit"
   }
 }
