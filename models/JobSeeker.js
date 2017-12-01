@@ -13,7 +13,7 @@ const jobSeekerSchema = new Schema({
     required: true
   },
   location: String,
-  education: [
+  educations: [
     {
       type: String,
       required: true

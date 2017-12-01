@@ -16,7 +16,7 @@ var id2=""
 const profile={
   "name" : "zaim",
   "location" : "bogor",
-  "education" : ["bachelor"],
+  "educations" : ["bachelor"],
   "skills" : ["can remember many thing"],
   "executive_summary" : text,
   "personality_insight" : "",
@@ -25,7 +25,7 @@ const profile={
 const profileEdit={
   "name" : "zaim malak",
   "location" : "jakarta",
-  "education" : ["bachelor"],
+  "educations" : ["bachelor"],
   "skills" : ["can remember many thing"],
   "executive_summary" : text,
   "personality_insight" : "",
@@ -36,28 +36,24 @@ describe('POST /job_seekers', () => {
   test('response status create profile job seeker', async () => {
     try {
       const response = await request(app).post('/job_seekers').send(profile)
-      // console.log('ini response', response.body.data);
-
-      id=response.body.data._id
+      id=response.body._id
       expect(response.statusCode).toBe(200);
-      expect(response.body.message).toContain("profile job seeker created succesfully")
     } catch (e) {
       console.log(e);
     }
   })
   test('response object data create profile job seeker', async () => {
     try {
-      // console.log('ini profile',profile);
       const response = await request(app).post('/job_seekers').send(profile)
       let newInsight = JSON.stringify(insight)
-      // console.log('ini response 2', response.body);
-      id2=response.body.data._id
+      // console.log('ini response 2', newInsight);
+      id2=response.body._id
       profile.personality_insight=newInsight
       profileEdit.personality_insight=newInsight
-      profile.password=response.body.data.password
-      profileEdit.password=response.body.data.password
-      expect(response.body.data.personality_insight).toEqual(newInsight)
-      expect(response.body.data).toMatchObject(profile)
+      profile.password=response.body.password
+      profileEdit.password=response.body.password
+      expect(response.body.personality_insight).toEqual(newInsight)
+      expect(response.body).toMatchObject(profile)
     } catch (e) {
       console.log(e);
     }
@@ -69,7 +65,6 @@ describe('GET /job_seekers/:id', () => {
     try {
       const response = await request(app).get(`/job_seekers/${id}`)
       expect(response.statusCode).toBe(200);
-      expect(response.body.message).toContain("profile job seeker founded")
     } catch (e) {
       console.log(e);
     }
@@ -77,7 +72,7 @@ describe('GET /job_seekers/:id', () => {
   test('response object data get profile by id job seeker', async () => {
     try {
       const response = await request(app).get(`/job_seekers/${id}`)
-      expect(response.body.data).toMatchObject({_id:id})
+      expect(response.body).toMatchObject(profile)
     } catch (e) {
       console.log(e);
     }
@@ -89,7 +84,6 @@ describe('PUT /job_seekers/:id', () => {
     try {
       const response = await request(app).put(`/job_seekers/${id}`).send(profileEdit)
       expect(response.statusCode).toBe(200);
-      expect(response.body.message).toContain("profile job seeker updated succesfully")
     } catch (e) {
       console.log(e);
     }
@@ -97,7 +91,7 @@ describe('PUT /job_seekers/:id', () => {
   test('response object data put profile by id job seeker', async () => {
     try {
       const response = await request(app).put(`/job_seekers/${id2}`).send(profileEdit)
-      expect(response.body.data).toMatchObject({_id:id2})
+      expect(response.body).toMatchObject(profile)
     } catch (e) {
       console.log(e);
     }
@@ -109,7 +103,6 @@ describe('DELETE /job_seekers/:id', () => {
     try {
       const response = await request(app).delete(`/job_seekers/${id}`)
       expect(response.statusCode).toBe(200);
-      expect(response.body.message).toContain("profile job seeker deleted succesfully")
     } catch (e) {
       console.log(e);
     }
@@ -117,7 +110,7 @@ describe('DELETE /job_seekers/:id', () => {
   test('response object data delete profile by id job seeker', async () => {
     try {
       const response = await request(app).delete(`/job_seekers/${id2}`)
-      expect(response.body.data).toMatchObject(profileEdit)
+      expect(response.body).toMatchObject(profileEdit)
     } catch (e) {
       console.log(e);
     }
