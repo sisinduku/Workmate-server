@@ -1,6 +1,7 @@
 const JobSeeker = require('../models/JobSeeker');
 const requestPersonality = require('../lib/requestPersonality');
 const crypto = require('crypto')
+const Redis = require('../lib/Redis');
 
 class JobSeekerCtrl {
   static create(req,res,next){
@@ -25,15 +26,20 @@ class JobSeekerCtrl {
       })      
     }
   }
-  static findById(req,res){
-    JobSeeker.findOne({_id:req.params.id})
-    .then(dataJobSeeker => {
-      // console.log('get data ', dataJobSeeker);
-      res.status(200).json(dataJobSeeker)
-    })
-    .catch(err => {
-      console.log(err);
-    })
+  static async findById(req,res){
+    let redis = await Redis.get(req.params.id)
+    if (redis !== null) {
+      res.status(200).json(redis)
+    } else {
+      JobSeeker.findOne({_id:req.params.id})
+      .then(dataJobSeeker => {
+        // console.log('get data ', dataJobSeeker);
+        res.status(200).json(dataJobSeeker)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+    }
   }
   static update(req,res){
     JobSeeker.findOne({_id:req.params.id})

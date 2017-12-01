@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const JobSeekerRedis = require('../lib/JobSeekerRedis');
+const Redis = require('../lib/Redis');
 
 mongoose.Promise = global.Promise
 mongoose.connection.openUri(`${process.env.APPDB}_${process.env.NODE_ENV}_db`, (err) => {
@@ -40,31 +40,18 @@ const jobSeekerSchema = new Schema({
 
 jobSeekerSchema.post('save', function(doc){
   // console.log('im here');
-  JobSeekerRedis.set(doc._id.toString(), doc)
+  Redis.set(doc._id.toString(), doc)
 })
 
 jobSeekerSchema.post('findOneAndRemove', function(doc){
   // console.log('im here');
-  JobSeekerRedis.del(doc._id.toString())
+  Redis.del(doc._id.toString())
 })
 
 jobSeekerSchema.post('findOneAndUpdate', function(doc){
-  JobSeekerRedis.del(this._conditions._id.toString())
-  JobSeekerRedis.set(this._conditions._id.toString(), this._update)
+  Redis.del(this._conditions._id.toString())
+  Redis.set(this._conditions._id.toString(), this._update)
   // console.log('im here update',this._conditions._id,' data ', this._update);
 })
-
-// jobSeekerSchema.pre('findOne', async function(next, done){
-//   let self=this
-//   redis = await JobSeekerRedis.get(self._conditions._id.toString())
-//   if (redis !== null) {
-//     console.log('im redis', redis);
-//     // return redis
-//     done()
-//     // next(redis)
-//   } else {
-//     next()
-//   }
-// })
 
 module.exports = mongoose.model('JobSeeker', jobSeekerSchema)

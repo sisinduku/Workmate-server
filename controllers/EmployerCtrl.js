@@ -1,7 +1,7 @@
 const Employer = require('../models/Employer')
-
+const Redis = require('../lib/Redis');
 class EmployerCtrl {
-  static getEmployers (req, res, next) {
+  static async getEmployers (req, res, next) {
     if (req.params.employerId) {
       Employer.findOne({
           _id: req.params.employerId
