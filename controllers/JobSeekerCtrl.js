@@ -12,10 +12,7 @@ class JobSeekerCtrl {
       req.body.personality_insight = JSON.stringify(personality)
       JobSeeker.create(req.body)
       .then(dataJobSeeker => {
-        res.status(200).json({
-          message:`profile job seeker created succesfully`,
-          data:dataJobSeeker
-        })
+        res.status(200).json(dataJobSeeker)
       })
       .catch(err => {
         console.log(err);
@@ -26,26 +23,31 @@ class JobSeekerCtrl {
     })
   }
   static findById(req,res){
-    JobSeeker.findById(req.params.id)
+    JobSeeker.findOne({_id:req.params.id})
     .then(dataJobSeeker => {
-      res.status(200).json({
-        message:`profile job seeker founded`,
-        data:dataJobSeeker
-      })
+      // console.log('get data ', dataJobSeeker);
+      res.status(200).json(dataJobSeeker)
     })
     .catch(err => {
       console.log(err);
     })
   }
   static update(req,res){
-    JobSeeker.findOneAndUpdate({
-      _id:req.params.id
-    },req.body
-    )
-    .then(dataJobSeeker => {
-      res.status(200).json({
-        message:`profile job seeker updated succesfully`,
-        data:dataJobSeeker
+    JobSeeker.findOne({_id:req.params.id})
+    .then(async (dataExist) => {
+      if (dataExist.executive_summary !== req.body.executive_summary) {
+        let promisePersonality = await requestPersonality(req.body.executive_summary)
+        req.body.personality_insight = JSON.stringify(personality)
+      }
+      JobSeeker.findOneAndUpdate({
+          _id:req.params.id
+        },req.body
+      )
+      .then(dataJobSeeker => {
+        res.status(200).json(dataJobSeeker)
+      })
+      .catch(err => {
+        console.log(err);
       })
     })
     .catch(err => {
@@ -57,10 +59,7 @@ class JobSeekerCtrl {
       _id:req.params.id
     })
     .then(dataJobSeeker => {
-      res.status(200).json({
-        message:`profile job seeker deleted succesfully`,
-        data:dataJobSeeker
-      })
+      res.status(200).json(dataJobSeeker)
     })
     .catch(err => {
       console.log(err);
