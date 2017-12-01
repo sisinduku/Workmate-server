@@ -22,6 +22,15 @@ const profile={
   "personality_insight" : "",
   "password": "a"
 }
+const profileError={
+  "name" : "zaim",
+  "location" : "bogor",
+  "educations" : ["bachelor"],
+  "skills" : ["can remember many thing"],
+  "executive_summary" : "",
+  "personality_insight" : "",
+  "password": "a"
+}
 const profileEdit={
   "name" : "zaim malak",
   "location" : "jakarta",
@@ -55,6 +64,14 @@ describe('POST /job_seekers', () => {
       expect(response.body.personality_insight).toEqual(newInsight)
       expect(response.body).toMatchObject(profile)
     } catch (e) {
+      console.log(e);
+    }
+  })
+  test('response status error when executive summary < 100', async () => {
+    try {
+      const response = await request(app).post('/job_seekers').send(profileError)
+    } catch (e) {
+      expect(response.statusCode).toBe(500);
       console.log(e);
     }
   })
