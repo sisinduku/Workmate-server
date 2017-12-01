@@ -1,10 +1,17 @@
+env:
+  global:
+    - CODECLIMATE_REPO_TOKEN=787a2f89b15c637323c7340d65ec17e898ac44480706b4b4122ea040c2a88f1d
 language: node_js
+services:
+  - mongodb
+  - redis-server
 node_js:
 - '8'
+after_script:
+  - ./node_modules/.bin/codeclimate-test-reporter < coverage/lcov.info
 deploy:
   provider: gae
   keyfile: gcp-learn-7e72e051fe21.json
   project: gcp-learn-184002
 before_install:
-- openssl aes-256-cbc -K $encrypted_de99cca9bd3d_key -iv $encrypted_de99cca9bd3d_iv
-  -in gcp-learn-7e72e051fe21.json.enc -out gcp-learn-7e72e051fe21.json -d
+- openssl aes-256-cbc -K $encrypted_de99cca9bd3d_key -iv $encrypted_de99cca9bd3d_iv -in gcp-learn-7e72e051fe21.json.enc -out gcp-learn-7e72e051fe21.json -d
