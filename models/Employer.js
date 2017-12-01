@@ -12,7 +12,7 @@ mongoose.connection.openUri(`${process.env.APPDB}_${process.env.NODE_ENV}_db`, (
 let employerSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: '{PATH} is required'
   },
   company: String,
   location: String,
@@ -34,7 +34,7 @@ employerSchema.pre('save', function (next) {
   next()
 })
 
-employerSchema.pre('findOneAndUpdate', function(next) {
+employerSchema.pre('findOneAndUpdate', function (next) {
   this.updateOne({
       _id: this._conditions._id
     }, {
@@ -45,6 +45,7 @@ employerSchema.pre('findOneAndUpdate', function(next) {
     })
     .catch(reason => {
       console.log(reason)
+      next(reason)
     })
 })
 

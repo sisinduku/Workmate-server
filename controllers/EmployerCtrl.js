@@ -18,6 +18,21 @@ class EmployerCtrl {
     }
   }
 
+  static updateEmployer (req, res, next) {
+    Employer.findOneAndUpdate({
+        _id: req.params.employerId
+      }, req.body, {new: true, runValidators: true})
+      .then((updated) => {
+        if (updated) {
+          res.status(200).json(updated)
+        } else {
+          res.status(204).json()
+        }
+      })
+      .catch((err) => {
+        res.status(400).json(err)
+      })
+  }
   // static postEmployer (req, res, next) {
   //   Employer.create(req.body)
   //     .then((inserted) => {
@@ -27,19 +42,7 @@ class EmployerCtrl {
   //       res.status(400).json(err);
   //     })
   // }
-  //
-  // static updateEmployer (req, res, next) {
-  //   Employer.findOneAndUpdate({
-  //       _id: new ObjectId(req.params.employerId)
-  //     }, req.body)
-  //     .then((updated) => {
-  //       res.status(200).json(updated);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //       res.status(400).json(err);
-  //     })
-  // }
+
   //
   // static deleteEmployer (req, res, next) {
   //   Employer.findOneAndRemove({
