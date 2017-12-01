@@ -68,4 +68,34 @@ describe('Testing Employer CRUD', () => {
       })
     })
   })
+
+  describe('Testing Employer POST', () => {
+    test('This should return new employer', () => {
+      return request(app).post('/employer/post_employer').send({
+        name: 'Lorem ipsum',
+        company: 'PT. Ipsum',
+        location: 'Tangerang',
+        password: "sdJAS87123jn"
+      }).then(response => {
+        expect(response.statusCode).toBe(201)
+        expect(response.body).toMatchObject({name: 'Lorem ipsum', company: 'PT. Ipsum', location: 'Tangerang', password: crypto.createHash('md5').update("sdJAS87123jn").digest('hex')})
+      })
+    })
+    test('This should return name is required', () => {
+      return request(app).post('/employer/post_employer').send({
+        company: 'PT. Ipsum',
+        location: 'Tangerang',
+        password: "sdJAS87123jn"
+      }).then(response => {
+        expect(response.statusCode).toBe(400)
+        expect(response.body).toMatchObject({
+          errors: {
+            name: {
+              message: 'name is required'
+            }
+          }
+        })
+      })
+    })
+  })
 })

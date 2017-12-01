@@ -33,15 +33,16 @@ class EmployerCtrl {
         res.status(400).json(err)
       })
   }
-  // static postEmployer (req, res, next) {
-  //   Employer.create(req.body)
-  //     .then((inserted) => {
-  //       res.status(201).json(inserted);
-  //     })
-  //     .catch((err) => {
-  //       res.status(400).json(err);
-  //     })
-  // }
+
+  static postEmployer (req, res, next) {
+    Employer.create(req.body)
+      .then((inserted) => {
+        res.status(201).json(inserted);
+      })
+      .catch((err) => {
+        res.status(400).json(err);
+      })
+  }
 
   //
   // static deleteEmployer (req, res, next) {
