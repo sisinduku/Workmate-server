@@ -6,21 +6,24 @@ class JobSeekerCtrl {
   static create(req,res,next){
     let newPass=crypto.createHash('md5').update(req.body.password).digest('hex');
     req.body.password=newPass
-
-    requestPersonality(req.body.executive_summary)
-    .then(personality => {
-      req.body.personality_insight = JSON.stringify(personality)
-      JobSeeker.create(req.body)
-      .then(dataJobSeeker => {
-        res.status(200).json(dataJobSeeker)
+    if (req.body.executive_summary.length<100) {
+      res.status(500).send('your executive summary must >= 100')
+    } else {
+      requestPersonality(req.body.executive_summary)
+      .then(personality => {
+        req.body.personality_insight = JSON.stringify(personality)
+        JobSeeker.create(req.body)
+        .then(dataJobSeeker => {
+          res.status(200).json(dataJobSeeker)
+        })
+        .catch(err => {
+          console.log(err);
+        })
       })
       .catch(err => {
         console.log(err);
-      })
-    })
-    .catch(err => {
-      console.log(err);
-    })
+      })      
+    }
   }
   static findById(req,res){
     JobSeeker.findOne({_id:req.params.id})
