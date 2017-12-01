@@ -3,12 +3,17 @@ const Redis = require('../lib/Redis');
 class EmployerCtrl {
   static async getEmployers (req, res, next) {
     if (req.params.employerId) {
-      Employer.findOne({
-          _id: req.params.employerId
-        })
-        .then((employer) => {
-          res.status(200).json(employer)
-        })
+      let redis = await Redis.get(req.params.employerId)
+      if (redis !== null) {
+        res.status(200).json(redis)
+      } else {
+        Employer.findOne({
+            _id: req.params.employerId
+          })
+          .then((employer) => {
+            res.status(200).json(employer)
+          })
+      }
     } else {
       Employer.find({})
         .populate(['author'])
