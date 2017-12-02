@@ -1,6 +1,7 @@
 # workmate-server
 # REST API
 List  of articles routes:
+
 | Route | HTTP | Description |
 | ------ | ------ | ------ |
 | `/job_seekers/:id` | GET | Show profile job seeker by id |
