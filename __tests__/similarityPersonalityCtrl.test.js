@@ -3,20 +3,20 @@ const request = require('supertest')
 const app = require('../app')
 const JobSeeker = require('../models/JobSeeker')
 
-const input = [
-  {"type": "big5_openness", "score": 0.8830326747838335},
-  {"type": "big5_extraversion", "score": 0.5316062392648926},
-  {"type": "big5_agreeableness", "score": 0.3103721247305993},
-  {"type": "big5_conscientiousness", "score": 0.8995600858165484},
-  {"type": "need_curiosity", "score": 0.6285129423518493},
-  {"type": "need_ideal", "score": 0.29515901920240906},
-  {"type": "need_challenge", "score": 0.3392505619910239},
-  {"type": "need_practicality", "score": 0.18739760333131683},
-  {"type": "value_openness_to_change", "score": 0.41836192917150344},
-  {"type": "value_self_transcendence", "score": 0.15838152766499647},
-  {"type": "value_conservation", "score": 0.16470772102430248},
-  {"type": "value_self_enhancement", "score": 0.03444714630976964}
-]
+const input = {
+  "big5_openness": 0.8830326747838335,
+  "big5_extraversion": 0.5316062392648926,
+  "big5_agreeableness": 0.3103721247305993,
+  "big5_conscientiousness": 0.8995600858165484,
+  "need_curiosity": 0.6285129423518493,
+  "need_ideal": 0.29515901920240906,
+  "need_challenge": 0.3392505619910239,
+  "need_practicality": 0.18739760333131683,
+  "value_openness_to_change": 0.41836192917150344,
+  "value_self_transcendence": 0.15838152766499647,
+  "value_conservation": 0.16470772102430248,
+  "value_self_enhancement": 0.03444714630976964
+}
 const summary = require('../__mockData__/summary.json')
 const user1 = require('../__mockData__/user1.json')
 const user2 = require('../__mockData__/user2.json')
@@ -138,7 +138,7 @@ describe('Testing Search Similarity Controller', () => {
   test('Test Finding Similarity Value', () => {
     return request(app)
       .post('/search_personality')
-      .send({criteria: input})
+      .send(input)
       .then(response => {
         expect(response.statusCode).toBe(200)
         expect(response.body).toHaveLength(7)
@@ -147,7 +147,7 @@ describe('Testing Search Similarity Controller', () => {
   test('Test Finding Similarity Value with specified limit', () => {
     return request(app)
       .post('/search_personality')
-      .send({criteria: input, min_criteria: 0.56})
+      .send({...input, min_criteria: 0.56})
       .then(response => {
         expect(response.statusCode).toBe(200)
         expect(response.body).toHaveLength(5)
