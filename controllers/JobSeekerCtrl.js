@@ -17,12 +17,12 @@ class JobSeekerCtrl {
           res.status(200).json(dataJobSeeker)
         })
         .catch(err => {
-          console.log(err);
+          console.log(err)
         })
       })
       .catch(err => {
         console.log(err);
-      })      
+      })
     }
   }
   static findById(req,res){
