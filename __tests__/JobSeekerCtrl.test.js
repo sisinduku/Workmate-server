@@ -61,7 +61,6 @@ describe('Testing Job Seeker End Point', () => {
       try {
         const response = await request(app).post('/job_seekers').send(profile)
         let newInsight = JSON.stringify(insight)
-        // console.log('ini response 2', newInsight);
         id2=response.body._id
         profile.personality_insight=newInsight
         profileEdit.personality_insight=newInsight
@@ -77,8 +76,8 @@ describe('Testing Job Seeker End Point', () => {
       try {
         const response = await request(app).post('/job_seekers').send(profileError)
       } catch (e) {
-        expect(response.statusCode).toBe(500);
-        console.log(e);
+        expect(response.statusCode).toBe(400)
+        expect(response.body.message).toBe('words count must >= 100')
       }
     })
   })
