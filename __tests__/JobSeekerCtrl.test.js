@@ -5,6 +5,7 @@ const JobSeeker = require('../models/JobSeeker');
 
 let text = fs.readFileSync('./__mockData__/profile.txt', 'utf-8')
 text = text.replace(/\r?\n|\r/g, '')
+
 jest.mock('watson-developer-cloud/personality-insights/v3', () => jest.fn())
 const PersonalityInsightsV3 = require('watson-developer-cloud/personality-insights/v3')
 const insight = require('../__mockData__/user1.json');
