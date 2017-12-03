@@ -20,7 +20,7 @@ describe('Testing Search personality', () => {
       profile: jest.fn((obj, cb) => cb(null, insight))
     }))
     const data = await requestPersonality('coba salah aja')
-    expect(data).toEqual({error: 'words count must >= 100'})
+    expect(data.message).toEqual('words count must >= 100')
   })
   test('Response should give error code 401', async () => {
     PersonalityInsightsV3.mockImplementation(() => ({

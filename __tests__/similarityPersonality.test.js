@@ -24,9 +24,12 @@ describe('Testing similarity function', () => {
   test('Response should give 1 similarity', () => {
     expect(similarityPersonality(input, insight)).toEqual(1)
   })
-  test('Response should give error', () => {
-    expect(similarityPersonality(null, insight)).toEqual({error: 'parameter could not be null'})
-    expect(similarityPersonality(insight, null)).toEqual({error: 'parameter could not be null'})
-    expect(similarityPersonality(null, null)).toEqual({error: 'parameter could not be null'})
+  test('Response should give error due to no origin paramter', () => {
+    const result = similarityPersonality(null, insight)
+    expect(result.message).toEqual('origin parameter could not be null')
+  })
+  test('Response should give error due to no target paramter', () => {
+    const result = similarityPersonality(insight, null)
+    expect(result.message).toEqual('target parameter could not be null')
   })
 })
