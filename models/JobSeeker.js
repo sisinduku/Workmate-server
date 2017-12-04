@@ -17,6 +17,7 @@ const jobSeekerSchema = new Schema({
     required: true
   },
   location: String,
+  email: String,
   educations: [
     {
       type: String,
