@@ -2,6 +2,7 @@ const request = require('supertest')
 
 const app = require('../app')
 const JobSeeker = require('../models/JobSeeker')
+const Redis = require('../lib/Redis')
 
 const input = {
   "big5_openness": 0.8830326747838335,
@@ -133,6 +134,7 @@ describe('Testing Search Similarity Controller', () => {
 
   afterAll(async () => {
     await JobSeeker.remove({})
+    await Redis.flushall()
   })
 
   test('Test Finding Similarity Value', () => {
