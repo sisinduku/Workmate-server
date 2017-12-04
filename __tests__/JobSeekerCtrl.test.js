@@ -46,6 +46,7 @@ const profileEdit={
 describe('Testing Job Seeker End Point', () => {
   afterAll(async () => {
     await JobSeeker.remove({})
+    await Redis.flushall()
   })
 
   describe('POST /job_seekers', () => {
