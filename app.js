@@ -1,6 +1,7 @@
 const app = require('express')()
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const graphqlHTTP = require('express-graphql')
 require('dotenv').config()
 
 const SearchPersonalityRoute = require('./routes/SearchPersonalityRoute')
@@ -12,10 +13,22 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 
-require('dotenv').config()
 const job_seeker = require('./routes/JobSeekerRoute');
 app.use('/job_seekers', job_seeker)
 app.use('/search_personality', SearchPersonalityRoute)
 app.use('/employer', EmployerRoute)
+
+/*
+* GRAPHQL SCHEMA
+*/
+const RootSchema = require('./graphqls/RootSchema');
+
+/*
+* Setup endpoint for GraphQL
+*/
+app.use('/graphql', graphqlHTTP({
+  schema: RootSchema,
+  graphiql: true
+}));
 
 module.exports = app
