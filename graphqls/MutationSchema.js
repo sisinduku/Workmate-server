@@ -69,7 +69,9 @@ const MutationSchema = new GraphQLObjectType({
                 }
                 JobSeeker.findOneAndUpdate({
                     _id:_id
-                  },jobSeeker
+                  },jobSeeker,{
+                    new: true
+                  }
                 )
                 .then(dataJobSeeker => {
                   resolve(dataJobSeeker)

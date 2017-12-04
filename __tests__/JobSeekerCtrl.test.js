@@ -115,7 +115,7 @@ describe('Testing Job Seeker End Point', () => {
     test('response object data put profile by id job seeker', async () => {
       try {
         const response = await request(app).put(`/job_seekers/${id2}`).send(profileEdit)
-        expect(response.body).toMatchObject(profile)
+        expect(response.body).toMatchObject(profileEdit)
       } catch (e) {
         console.log(e);
       }
