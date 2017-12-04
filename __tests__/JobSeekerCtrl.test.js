@@ -18,6 +18,7 @@ var id2=""
 const profile={
   "name" : "zaim",
   "location" : "bogor",
+  "email": "halo@halo.com",
   "educations" : ["bachelor"],
   "skills" : ["can remember many thing"],
   "executive_summary" : text,
@@ -27,6 +28,7 @@ const profile={
 const profileError={
   "name" : "zaim",
   "location" : "bogor",
+  "email": "halo@halo.com",
   "educations" : ["bachelor"],
   "skills" : ["can remember many thing"],
   "executive_summary" : "",
@@ -36,6 +38,7 @@ const profileError={
 const profileEdit={
   "name" : "zaim malak",
   "location" : "jakarta",
+  "email": "halo@halo.com",
   "educations" : ["bachelor"],
   "skills" : ["can remember many thing"],
   "executive_summary" : text,

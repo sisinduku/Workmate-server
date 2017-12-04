@@ -12,6 +12,9 @@ const JobSeekerSchema = new GraphQLObjectType({
     location: {
       type: GraphQLString
     },
+    email: {
+      type: GraphQLString
+    },
     educations: {
       type: new GraphQLList(GraphQLString)
     },

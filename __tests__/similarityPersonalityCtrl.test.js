@@ -34,6 +34,7 @@ describe('Testing Search Similarity Controller', () => {
       {
         name: 'Satria Saputra',
         location: 'Jakarta',
+        email: "halo@halo.com",
         education: [
           'Universitas Bina Nusantara'
         ],
@@ -48,6 +49,7 @@ describe('Testing Search Similarity Controller', () => {
       {
         name: 'Bima Ambien',
         location: 'Bogor',
+        email: "halo@halo.com",
         education: [
           'Institut Pertanian Bogor'
         ],
@@ -62,6 +64,7 @@ describe('Testing Search Similarity Controller', () => {
       {
         name: 'Doni Alamanda',
         location: 'Jakarta',
+        email: "halo@halo.com",
         education: [
           'Universitas Bina Nusantara'
         ],
@@ -76,6 +79,7 @@ describe('Testing Search Similarity Controller', () => {
       {
         name: 'Crystal Clear',
         location: 'Jakarta',
+        email: "halo@halo.com",
         education: [
           'Universitas Bina Nusantara'
         ],
@@ -90,6 +94,7 @@ describe('Testing Search Similarity Controller', () => {
       {
         name: 'Cikita Medeni',
         location: 'Jakarta',
+        email: "halo@halo.com",
         education: [
           'Universitas Bina Nusantara'
         ],
@@ -104,6 +109,7 @@ describe('Testing Search Similarity Controller', () => {
       {
         name: 'Agnes Monikah',
         location: 'Jakarta',
+        email: "halo@halo.com",
         education: [
           'Universitas Bina Nusantara'
         ],
@@ -118,6 +124,7 @@ describe('Testing Search Similarity Controller', () => {
       {
         name: 'Maria Ozawi',
         location: 'Jakarta',
+        email: "halo@halo.com",
         education: [
           'Universitas Bina Nusantara'
         ],
