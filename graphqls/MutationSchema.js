@@ -1,4 +1,4 @@
-const { GraphQLObjectType } = require('graphql')
+const { GraphQLObjectType, GraphQLID, GraphQLNonNull } = require('graphql')
 const crypto = require('crypto')
 
 const JobSeekerInputSchema = require('./JobSeekerInputSchema')
@@ -43,6 +43,45 @@ const MutationSchema = new GraphQLObjectType({
                 })
             })
           }
+        } catch (e) {
+          throw new Error(e)
+        }
+      }
+    },
+    updateJobSeeker: {
+      type: JobSeekerSchema,
+      args: {
+        _id: {
+          type: new GraphQLNonNull(GraphQLID)
+        },
+        jobSeeker: {
+          type: JobSeekerInputSchema
+        }
+      },
+      resolve: async (_, { _id, jobSeeker }) => {
+        try {
+          return new Promise((resolve, reject) => {
+            JobSeeker.findOne({_id:_id})
+              .then(async (dataExist) => {
+                if (dataExist.executive_summary !== jobSeeker.executive_summary) {
+                  let promisePersonality = await requestPersonality(jobSeeker.executive_summary)
+                  jobSeeker.personality_insight = JSON.stringify(promisePersonality)
+                }
+                JobSeeker.findOneAndUpdate({
+                    _id:_id
+                  },jobSeeker
+                )
+                .then(dataJobSeeker => {
+                  resolve(dataJobSeeker)
+                })
+                .catch(err => {
+                  reject(err)
+                })
+              })
+              .catch(err => {
+                reject(err)
+              })
+          })
         } catch (e) {
           throw new Error(e)
         }
