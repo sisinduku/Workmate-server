@@ -50,7 +50,9 @@ class JobSeekerCtrl {
       }
       JobSeeker.findOneAndUpdate({
           _id:req.params.id
-        },req.body
+        },req.body,{
+          new: true
+        }
       )
       .then(dataJobSeeker => {
         res.status(200).json(dataJobSeeker)
