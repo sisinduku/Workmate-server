@@ -7,7 +7,7 @@ class SearchPersonalityCtrl {
       .then(jobseekers => {
         let result = []
         jobseekers.forEach(jobSeeker => {
-          let similarity = similarityPersonality(req.body.criteria, JSON.parse(jobSeeker.personality_insight))
+          let similarity = similarityPersonality(req.body, JSON.parse(jobSeeker.personality_insight))
           result.push({jobSeeker, similarity})
         })
         result.sort((a, b) => b.similarity - a.similarity)

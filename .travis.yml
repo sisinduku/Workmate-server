@@ -5,6 +5,7 @@ env:
 language: node_js
 services:
   - mongodb
+  - redis-server
 node_js:
 - '8'
 before_script:
