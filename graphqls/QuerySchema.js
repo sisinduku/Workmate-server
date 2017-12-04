@@ -2,11 +2,13 @@ const { GraphQLObjectType, GraphQLList, GraphQLID, GraphQLNonNull } = require('g
 
 const JobSeekerSchema = require('./JobSeekerSchema')
 const JobSeekerByPersonalitySchema = require('./JobSeekerByPersonalitySchema')
+const EmployerSchema = require('./EmployerSchema')
 const CriteriaInputSchema = require('./CriteriaInputSchema')
 
 const similarityPersonality = require('../lib/similarityPersonality')
 
 const JobSeeker = require('../models/JobSeeker')
+const Employer = require('../models/Employer')
 
 const QuerySchema = new GraphQLObjectType({
   name: 'Query',
@@ -25,6 +27,47 @@ const QuerySchema = new GraphQLObjectType({
         }
         catch (err) {
           return err;
+        }
+      }
+    },
+    getJobSeekers: {
+      type: new GraphQLList(JobSeekerSchema),
+      resolve: async () => {
+        try {
+          const jobSeekers = await JobSeeker.find({});
+          return jobSeekers;
+        }
+        catch (err) {
+          return err
+        }
+      }
+    },
+    getEmployer: {
+      type: EmployerSchema,
+      args: {
+        _id: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      },
+      resolve: async (_, { _id }) => {
+        try {
+          const employer = await Employer.findOne({ _id: _id });
+          return employer;
+        }
+        catch (err) {
+          return err;
+        }
+      }
+    },
+    getEmployers: {
+      type: new GraphQLList(EmployerSchema),
+      resolve: async () => {
+        try {
+          const employers = await Employer.find({});
+          return employers;
+        }
+        catch (err) {
+          return err
         }
       }
     },

@@ -18,6 +18,9 @@ const JobSeekerSchema = new GraphQLObjectType({
     skills: {
       type: new GraphQLList(GraphQLString)
     },
+    password: {
+      type: GraphQLString
+    },
     executive_summary: {
       type: GraphQLString
     },
