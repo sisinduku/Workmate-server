@@ -44,8 +44,8 @@ const profileEdit={
 }
 
 describe('Testing Job Seeker End Point', () => {
-  afterAll(() => {
-    JobSeeker.remove({})
+  afterAll(async () => {
+    await JobSeeker.remove({})
   })
 
   describe('POST /job_seekers', () => {
