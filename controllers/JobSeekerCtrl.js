@@ -23,7 +23,7 @@ class JobSeekerCtrl {
       })
       .catch(err => {
         console.log(err);
-      })      
+      })
     }
   }
   static async findById(req,res){
@@ -46,7 +46,7 @@ class JobSeekerCtrl {
     .then(async (dataExist) => {
       if (dataExist.executive_summary !== req.body.executive_summary) {
         let promisePersonality = await requestPersonality(req.body.executive_summary)
-        req.body.personality_insight = JSON.stringify(personality)
+        req.body.personality_insight = JSON.stringify(promisePersonality)
       }
       JobSeeker.findOneAndUpdate({
           _id:req.params.id
