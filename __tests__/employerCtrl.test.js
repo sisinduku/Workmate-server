@@ -24,6 +24,7 @@ describe('Testing Employer CRUD', () => {
 
   afterAll(async () => {
     await Employer.remove({})
+    await Redis.flushall()
   })
 
   describe('Testing Employer READ', () => {

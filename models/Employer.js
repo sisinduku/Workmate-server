@@ -1,9 +1,12 @@
 const mongoose = require('mongoose')
 const crypto = require('crypto')
 const Redis = require('../lib/Redis');
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
+
+const DB_HOST = process.env.DB_HOST || `${process.env.APPDB}_${process.env.NODE_ENV}_db`;
+
 mongoose.Promise = global.Promise
-mongoose.connection.openUri(`${process.env.APPDB}_${process.env.NODE_ENV}_db`, (err) => {
+mongoose.connection.openUri(DB_HOST, (err) => {
   if (err) {
     console.log(err);
   }
