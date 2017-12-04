@@ -26,7 +26,7 @@ const QuerySchema = new GraphQLObjectType({
           return jobSeeker;
         }
         catch (err) {
-          return err;
+          throw new Error(err)
         }
       }
     },
@@ -38,7 +38,7 @@ const QuerySchema = new GraphQLObjectType({
           return jobSeekers;
         }
         catch (err) {
-          return err
+          throw new Error(err)
         }
       }
     },
@@ -55,7 +55,7 @@ const QuerySchema = new GraphQLObjectType({
           return employer;
         }
         catch (err) {
-          return err;
+          throw new Error(err)
         }
       }
     },
@@ -67,7 +67,7 @@ const QuerySchema = new GraphQLObjectType({
           return employers;
         }
         catch (err) {
-          return err
+          throw new Error(err)
         }
       }
     },
@@ -87,7 +87,7 @@ const QuerySchema = new GraphQLObjectType({
           }))
         }
         catch (err) {
-          return err
+          throw new Error(err)
         }
       }
     }
