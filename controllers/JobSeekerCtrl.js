@@ -33,7 +33,6 @@ class JobSeekerCtrl {
     } else {
       JobSeeker.findOne({_id:req.params.id})
       .then(dataJobSeeker => {
-        // console.log('get data ', dataJobSeeker);
         res.status(200).json(dataJobSeeker)
       })
       .catch(err => {

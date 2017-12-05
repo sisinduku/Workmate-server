@@ -9,6 +9,9 @@ const EmployerSchema = new GraphQLObjectType({
     name: {
       type: GraphQLString
     },
+    email: {
+      type: GraphQLString
+    },
     company: {
       type: GraphQLString
     },
