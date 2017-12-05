@@ -4,7 +4,7 @@ const JobSeekerInputSchema = new GraphQLInputObjectType({
   name: 'JobSeekerInput',
   fields: {
     name: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: GraphQLString
     },
     location: {
       type: GraphQLString
@@ -22,7 +22,7 @@ const JobSeekerInputSchema = new GraphQLInputObjectType({
       type: GraphQLString
     },
     executive_summary: {
-      type: new GraphQLNonNull(GraphQLString)
+      type: GraphQLString
     },
     password: {
       type: GraphQLString

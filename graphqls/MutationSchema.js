@@ -64,8 +64,12 @@ const MutationSchema = new GraphQLObjectType({
             JobSeeker.findOne({_id:_id})
               .then(async (dataExist) => {
                 if (dataExist.executive_summary !== jobSeeker.executive_summary) {
-                  let promisePersonality = await requestPersonality(jobSeeker.executive_summary)
-                  jobSeeker.personality_insight = JSON.stringify(promisePersonality)
+                  try {
+                    let promisePersonality = await requestPersonality(jobSeeker.executive_summary)
+                    jobSeeker.personality_insight = JSON.stringify(promisePersonality)
+                  } catch (e) {
+                    reject(e)
+                  }
                 }
                 JobSeeker.findOneAndUpdate({
                     _id:_id
