@@ -8,7 +8,6 @@ jest.setTimeout(5000)
 
 describe('Testing Employer CRUD', () => {
   beforeAll(async (done) => {
-    await afterTestHelper()
     await beforeTestHelper()
     done()
   })

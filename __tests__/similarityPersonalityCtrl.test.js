@@ -20,7 +20,6 @@ const input = {
 
 describe('Testing Search Similarity Controller', () => {
   beforeAll(async () => {
-    await afterTestHelper()
     await beforeTestHelper()
   })
 

@@ -5,7 +5,6 @@ const RootSchema = require('../graphqls/RootSchema')
 
 describe('Testing Query GraphQL', () => {
   beforeAll(async () => {
-    await afterTestHelper()
     await beforeTestHelper()
   })
   afterAll(async () => {
