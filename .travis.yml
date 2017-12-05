@@ -15,6 +15,6 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT || true
+  - ./cc-test-reporter after-build || true
 before_install:
 - openssl aes-256-cbc -K $encrypted_de99cca9bd3d_key -iv $encrypted_de99cca9bd3d_iv -in gcp-learn-7e72e051fe21.json.enc -out gcp-learn-7e72e051fe21.json -d
