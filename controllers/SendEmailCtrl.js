@@ -1,8 +1,17 @@
 const nodemailer = require('nodemailer')
 
 function SendEmailCtrl(req,res) {
+  // let transporter = nodemailer.createTransport({
+  //   service: 'gmail',
+  //   auth: {
+  //     user: `${process.env.EMAILUSER}`,
+  //     pass: `${process.env.EMAILPASS}`
+  //   }
+  // })
   let transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.elasticemail.com',
+    port: 2525,
+    secure: false,
     auth: {
       user: `${process.env.EMAILUSER}`,
       pass: `${process.env.EMAILPASS}`
