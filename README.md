@@ -15,3 +15,4 @@ List of workmate routes:
 | `/employer/update_employer/:employerId` | POST | Update profile Employer |
 | `/employer/post_employer` | POST | Create new profile employer |
 | `/search_personality` | POST | Search all profile Job Seeker |
+| `/send_email` | POST | Send Email invitation to Job Seeker |
