@@ -17,7 +17,7 @@ describe('Testing sending email', () => {
       .then(response => {
         expect(response.statusCode).toBe(200)
         expect(sentMail[0]).toMatchObject({
-          from: `"PT. Workmate Technology Indonesia" <workmate.technology.indonesia@gmail.com>`,
+          from: `"Workmate" <workmate.technology.indonesia@gmail.com>`,
           to: `saptanto.sindu@gmail.com`,
           subject : `Invite Test and Interview`
         })
