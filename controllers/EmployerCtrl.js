@@ -16,7 +16,6 @@ class EmployerCtrl {
       }
     } else {
       Employer.find({})
-        .populate(['author'])
         .then((employers) => {
           res.status(200).json(employers)
         })
