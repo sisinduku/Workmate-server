@@ -20,6 +20,6 @@
   "scripts": {
     "start": "PORT=80 NODE_ENV=prod node index.js",
     "dev": "NODE_ENV=dev nodemon index.js",
-    "test": "APPDB=mongodb://localhost/workmate NODE_ENV=test jest --coverage --forceExit"
+    "test": "APPDB=mongodb://localhost/workmate NODE_ENV=test jest --coverage --maxWorkers=4 --forceExit"
   }
 }
