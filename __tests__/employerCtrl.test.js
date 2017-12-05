@@ -4,7 +4,7 @@ const crypto = require('crypto')
 const app = require('../app')
 const {beforeTestHelper, afterTestHelper} = require('../helpers/TestHelper')
 
-jest.setTimeout(10000)
+jest.setTimeout(15000)
 
 describe('Testing Employer CRUD', () => {
   beforeAll(async (done) => {

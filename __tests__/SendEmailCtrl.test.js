@@ -1,6 +1,7 @@
 const request = require('supertest')
 const nodemailerMock = require('nodemailer-mock')
 jest.setMock('nodemailer', nodemailerMock)
+jest.setTimeout(15000)
 
 const app = require('../app')
 
