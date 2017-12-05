@@ -16,11 +16,13 @@ PersonalityInsightsV3.mockImplementation(() => ({
 }))
 
 describe('Testing Mutation GraphQL', () => {
-  beforeAll(async () => {
+  beforeAll(async (done) => {
     await beforeTestHelper()
+    done()
   })
-  afterAll(async () => {
+  afterAll(async (done) => {
     await afterTestHelper()
+    done()
   })
 
   test('Testing postJobSeeker Mutation', async () => {

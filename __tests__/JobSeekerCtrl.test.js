@@ -49,8 +49,9 @@ const profileEdit={
 }
 
 describe('Testing Job Seeker End Point', () => {
-  afterAll(async () => {
+  afterAll(async (done) => {
     await afterTestHelper()
+    done()
   })
 
   describe('POST /job_seekers', () => {

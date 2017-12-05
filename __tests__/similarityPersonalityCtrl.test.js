@@ -19,12 +19,14 @@ const input = {
 }
 
 describe('Testing Search Similarity Controller', () => {
-  beforeAll(async () => {
+  beforeAll(async (done) => {
     await beforeTestHelper()
+    done()
   })
 
-  afterAll(async () => {
+  afterAll(async (done) => {
     await afterTestHelper()
+    done()
   })
 
   test('Test Finding Similarity Value', () => {

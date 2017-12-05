@@ -4,11 +4,13 @@ const { afterTestHelper, beforeTestHelper } = require('../helpers/TestHelper')
 const RootSchema = require('../graphqls/RootSchema')
 
 describe('Testing Query GraphQL', () => {
-  beforeAll(async () => {
+  beforeAll(async (done) => {
     await beforeTestHelper()
+    done()
   })
-  afterAll(async () => {
+  afterAll(async (done) => {
     await afterTestHelper()
+    done()
   })
 
   test('Testing getJobSeekers Query', async () => {
