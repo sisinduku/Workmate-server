@@ -1,2 +1,4 @@
 node_modules/
+coverages/
+dump.rdb
 .env
