@@ -29,7 +29,10 @@ describe('Testing Search personality', () => {
         error: 'Not Authorized'
       }, null))
     }))
-    const data = await requestPersonality(text)
-    expect(data).toMatchObject({code: 401, error: 'Not Authorized'})
+    try {
+      const data = await requestPersonality(text)
+    } catch (e) {
+      expect(e).toMatchObject({code: 401, error: 'Not Authorized'})
+    }
   })
 })
