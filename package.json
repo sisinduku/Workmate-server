@@ -8,6 +8,7 @@
     "express-graphql": "^0.6.11",
     "graphql": "^0.11.7",
     "mongoose": "^4.13.5",
+    "nodemailer": "^4.4.0",
     "redis": "^2.8.0",
     "watson-developer-cloud": "^2.42.0"
   },
