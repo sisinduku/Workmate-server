@@ -3,7 +3,7 @@ env:
     - CODECLIMATE_REPO_TOKEN=7031f0190e2b23cc6626cf65adb8a2f05c595343bdf166a94bd1025f1552ee28
     - CC_TEST_REPORTER_ID=7031f0190e2b23cc6626cf65adb8a2f05c595343bdf166a94bd1025f1552ee28
   - EMAILUSER=workmate.technology.indonesia@gmail.com
-  - EMAILNAME=PT. Workmate Technology Indonesia
+  - EMAILNAME=Workmate
 language: node_js
 services:
   - mongodb
