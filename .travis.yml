@@ -3,7 +3,7 @@ env:
     - CODECLIMATE_REPO_TOKEN=7031f0190e2b23cc6626cf65adb8a2f05c595343bdf166a94bd1025f1552ee28
     - CC_TEST_REPORTER_ID=7031f0190e2b23cc6626cf65adb8a2f05c595343bdf166a94bd1025f1552ee28
     - EMAILUSER=workmate.technology.indonesia@gmail.com
-    - EMAILNAME=Workmate  
+    - EMAILNAME=Workmate
 language: node_js
 services:
   - mongodb
@@ -15,6 +15,6 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT || true
 before_install:
 - openssl aes-256-cbc -K $encrypted_de99cca9bd3d_key -iv $encrypted_de99cca9bd3d_iv -in gcp-learn-7e72e051fe21.json.enc -out gcp-learn-7e72e051fe21.json -d
