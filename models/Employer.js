@@ -17,6 +17,7 @@ let employerSchema = new Schema({
     type: String,
     required: '{PATH} is required'
   },
+  email: String,
   company: String,
   location: String,
   password: {
