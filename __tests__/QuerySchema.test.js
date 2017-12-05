@@ -3,6 +3,8 @@ const { graphql } = require('graphql')
 const { afterTestHelper, beforeTestHelper } = require('../helpers/TestHelper')
 const RootSchema = require('../graphqls/RootSchema')
 
+jest.setTimeout(10000)
+
 describe('Testing Query GraphQL', () => {
   beforeAll(async (done) => {
     await beforeTestHelper()
@@ -13,7 +15,7 @@ describe('Testing Query GraphQL', () => {
     done()
   })
 
-  test('Testing getJobSeekers Query', async () => {
+  test('Testing getJobSeekers Query', async (done) => {
     const query = `
       query {
         getJobSeekers {
@@ -30,9 +32,10 @@ describe('Testing Query GraphQL', () => {
     expect(result).toHaveProperty('data')
     expect(result.data).toHaveProperty('getJobSeekers')
     expect(result.data.getJobSeekers).toHaveLength(7)
+    done()
   })
 
-  test('Testing getJobSeeker Query', async () => {
+  test('Testing getJobSeeker Query', async (done) => {
     const query = `
       query {
         getJobSeeker (_id: "507f1f77bcf86cd799439012") {
@@ -61,9 +64,10 @@ describe('Testing Query GraphQL', () => {
         'Express.js'
       ]
     })
+    done()
   })
 
-  test('Testing getEmployers Query', async () => {
+  test('Testing getEmployers Query', async (done) => {
     const query = `
       query {
         getEmployers {
@@ -79,9 +83,10 @@ describe('Testing Query GraphQL', () => {
     expect(result).toHaveProperty('data')
     expect(result.data).toHaveProperty('getEmployers')
     expect(result.data.getEmployers).toHaveLength(2)
+    done()
   })
 
-  test('Testing getEmployer Query', async () => {
+  test('Testing getEmployer Query', async (done) => {
     const query = `
       query {
         getEmployer (_id: "507f1f77bcf86cd799439011") {
@@ -103,9 +108,10 @@ describe('Testing Query GraphQL', () => {
       company: 'PT. Cempaka',
       location: 'Jakarta'
     })
+    done()
   })
 
-  test('Testing jobSeekersByPersonality Query', async () => {
+  test('Testing jobSeekersByPersonality Query', async (done) => {
     const query = `
     query {
       jobSeekersByPersonality (criteria: {
@@ -130,5 +136,6 @@ describe('Testing Query GraphQL', () => {
     expect(result).toHaveProperty('data')
     expect(result.data).toHaveProperty('jobSeekersByPersonality')
     expect(result.data.jobSeekersByPersonality).toHaveLength(7)
+    done()
   })
 })

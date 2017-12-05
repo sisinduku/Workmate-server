@@ -48,6 +48,8 @@ const profileEdit={
   "password": "a"
 }
 
+jest.setTimeout(10000)
+
 describe('Testing Job Seeker End Point', () => {
   afterAll(async (done) => {
     await afterTestHelper()
@@ -55,7 +57,7 @@ describe('Testing Job Seeker End Point', () => {
   })
 
   describe('POST /job_seekers', () => {
-    test('response status create profile job seeker', async () => {
+    test('response status create profile job seeker', async (done) => {
       try {
         const response = await request(app).post('/job_seekers').send(profile)
         id=response.body._id
@@ -63,8 +65,9 @@ describe('Testing Job Seeker End Point', () => {
       } catch (e) {
         console.log(e);
       }
+      done()
     })
-    test('response object data create profile job seeker', async () => {
+    test('response object data create profile job seeker', async (done) => {
       try {
         const response = await request(app).post('/job_seekers').send(profile)
         let newInsight = JSON.stringify(insight)
@@ -78,71 +81,79 @@ describe('Testing Job Seeker End Point', () => {
       } catch (e) {
         console.log(e);
       }
+      done()
     })
-    test('response status error when executive summary < 100', async () => {
+    test('response status error when executive summary < 100', async (done) => {
       try {
         const response = await request(app).post('/job_seekers').send(profileError)
       } catch (e) {
         expect(response.statusCode).toBe(400)
         expect(response.body.message).toBe('words count must >= 100')
       }
+      done()
     })
   })
 
   describe('GET /job_seekers/:id', () => {
-    test('response status get profile by id job seeker', async () => {
+    test('response status get profile by id job seeker', async (done) => {
       try {
         const response = await request(app).get(`/job_seekers/${id}`)
         expect(response.statusCode).toBe(200);
       } catch (e) {
         console.log(e);
       }
+      done()
     })
-    test('response object data get profile by id job seeker', async () => {
+    test('response object data get profile by id job seeker', async (done) => {
       try {
         const response = await request(app).get(`/job_seekers/${id}`)
         expect(response.body).toMatchObject(profile)
       } catch (e) {
         console.log(e);
       }
+      done()
     })
   })
 
   describe('PUT /job_seekers/:id', () => {
-    test('response status put profile by id job seeker', async () => {
+    test('response status put profile by id job seeker', async (done) => {
       try {
         const response = await request(app).put(`/job_seekers/${id}`).send(profileEdit)
         expect(response.statusCode).toBe(200);
       } catch (e) {
         console.log(e);
       }
+      done()
     })
-    test('response object data put profile by id job seeker', async () => {
+    test('response object data put profile by id job seeker', async (done) => {
       try {
         const response = await request(app).put(`/job_seekers/${id2}`).send(profileEdit)
         expect(response.body).toMatchObject(profileEdit)
       } catch (e) {
         console.log(e);
       }
+      done()
     })
   })
 
   describe('DELETE /job_seekers/:id', () => {
-    test('response status delete profile by id job seeker', async () => {
+    test('response status delete profile by id job seeker', async (done) => {
       try {
         const response = await request(app).delete(`/job_seekers/${id}`)
         expect(response.statusCode).toBe(200);
       } catch (e) {
         console.log(e);
       }
+      done()
     })
-    test('response object data delete profile by id job seeker', async () => {
+    test('response object data delete profile by id job seeker', async (done) => {
       try {
         const response = await request(app).delete(`/job_seekers/${id2}`)
         expect(response.body).toMatchObject(profileEdit)
       } catch (e) {
         console.log(e);
       }
+      done()
     })
   })
 })

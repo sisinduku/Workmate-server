@@ -18,6 +18,8 @@ const input = {
   "value_self_enhancement": 0.03444714630976964
 }
 
+jest.setTimeout(10000)
+
 describe('Testing Search Similarity Controller', () => {
   beforeAll(async (done) => {
     await beforeTestHelper()
@@ -29,22 +31,24 @@ describe('Testing Search Similarity Controller', () => {
     done()
   })
 
-  test('Test Finding Similarity Value', () => {
+  test('Test Finding Similarity Value', (done) => {
     return request(app)
       .post('/search_personality')
       .send(input)
       .then(response => {
         expect(response.statusCode).toBe(200)
         expect(response.body).toHaveLength(7)
+        done()
       })
   })
-  test('Test Finding Similarity Value with specified limit', () => {
+  test('Test Finding Similarity Value with specified limit', (done) => {
     return request(app)
       .post('/search_personality')
       .send({...input, min_criteria: 0.56})
       .then(response => {
         expect(response.statusCode).toBe(200)
         expect(response.body).toHaveLength(5)
+        done()
       })
   })
 })

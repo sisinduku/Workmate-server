@@ -15,6 +15,8 @@ PersonalityInsightsV3.mockImplementation(() => ({
   profile: jest.fn((obj, cb) => cb(null, insight))
 }))
 
+jest.setTimeout(10000)
+
 describe('Testing Mutation GraphQL', () => {
   beforeAll(async (done) => {
     await beforeTestHelper()
@@ -25,7 +27,7 @@ describe('Testing Mutation GraphQL', () => {
     done()
   })
 
-  test('Testing postJobSeeker Mutation', async () => {
+  test('Testing postJobSeeker Mutation', async (done) => {
     const strText = '"'+ text.replace(/"/g, "'") + '"'
     const query = `
       mutation {
@@ -62,10 +64,11 @@ describe('Testing Mutation GraphQL', () => {
       personality_insight : JSON.stringify(insight),
       password: crypto.createHash('md5').update('a').digest('hex')
     })
+    done()
   })
 
 
-  test('Testing postJobSeeker Summary < 100', async () => {
+  test('Testing postJobSeeker Summary < 100', async (done) => {
     const query = `
       mutation {
         postJobSeeker (jobSeeker: {
@@ -90,9 +93,10 @@ describe('Testing Mutation GraphQL', () => {
     `
     const result = await graphql(RootSchema, query)
     expect(result).toHaveProperty('errors')
+    done()
   })
 
-  test('Testing updateJobSeeker Mutation', async () => {
+  test('Testing updateJobSeeker Mutation', async (done) => {
     const strText = '"'+ text.replace(/"/g, "'") + '"'
     const query = `
       mutation {
@@ -120,9 +124,10 @@ describe('Testing Mutation GraphQL', () => {
     expect(result.data.updateJobSeeker).toMatchObject({
       location: "Tangerang"
     })
+    done()
   })
 
-  test('Testing postJobSeeker wrong personality insight password', async () => {
+  test('Testing postJobSeeker wrong personality insight password', async (done) => {
     PersonalityInsightsV3.mockImplementation(() => ({
       profile: jest.fn((obj, cb) => cb({
         code: 401,
@@ -154,5 +159,6 @@ describe('Testing Mutation GraphQL', () => {
     `
     const result = await graphql(RootSchema, query)
     expect(result).toHaveProperty('errors')
+    done()
   })
 })
