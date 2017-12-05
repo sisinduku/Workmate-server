@@ -1,7 +1,9 @@
 const app = require('../app')
 const request = require('supertest')
 const fs = require('fs')
-const JobSeeker = require('../models/JobSeeker');
+const JobSeeker = require('../models/JobSeeker')
+
+const { afterTestHelper } = require('../helpers/TestHelper')
 
 let text = fs.readFileSync('./__mockData__/profile.txt', 'utf-8')
 text = text.replace(/\r?\n|\r/g, '')
@@ -48,8 +50,7 @@ const profileEdit={
 
 describe('Testing Job Seeker End Point', () => {
   afterAll(async () => {
-    await JobSeeker.remove({})
-    await Redis.flushall()
+    await afterTestHelper()
   })
 
   describe('POST /job_seekers', () => {
