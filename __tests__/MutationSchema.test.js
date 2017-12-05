@@ -15,7 +15,7 @@ PersonalityInsightsV3.mockImplementation(() => ({
   profile: jest.fn((obj, cb) => cb(null, insight))
 }))
 
-jest.setTimeout(10000)
+jest.setTimeout(15000)
 
 describe('Testing Mutation GraphQL', () => {
   beforeAll(async (done) => {
