@@ -6,6 +6,7 @@ const {beforeTestHelper, afterTestHelper} = require('../helpers/TestHelper')
 
 describe('Testing Employer CRUD', () => {
   beforeAll(async () => {
+    await afterTestHelper()
     await beforeTestHelper()
   })
 
