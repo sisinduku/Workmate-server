@@ -8,6 +8,7 @@
     "express-graphql": "^0.6.11",
     "graphql": "^0.11.7",
     "mongoose": "^4.13.5",
+    "nodemailer": "^4.4.0",
     "redis": "^2.8.0",
     "watson-developer-cloud": "^2.42.0"
   },
@@ -15,11 +16,12 @@
     "codeclimate-test-reporter": "^0.5.0",
     "jest": "^21.2.1",
     "mockingoose": "^2.4.0",
+    "nodemailer-mock": "^1.3.11",
     "supertest": "^3.0.0"
   },
   "scripts": {
     "start": "PORT=80 NODE_ENV=prod node index.js",
     "dev": "NODE_ENV=dev nodemon index.js",
-    "test": "APPDB=mongodb://localhost/workmate NODE_ENV=test jest --coverage --forceExit"
+    "test": "APPDB=mongodb://localhost/workmate NODE_ENV=test jest --coverage --runInBand --forceExit"
   }
 }

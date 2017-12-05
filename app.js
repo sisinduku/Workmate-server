@@ -31,4 +31,7 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true
 }));
 
+const send_email = require('./routes/SendEmailRoute');
+app.use('/send_email', send_email)
+
 module.exports = app

@@ -1,8 +1,7 @@
 const request = require('supertest')
 
 const app = require('../app')
-const JobSeeker = require('../models/JobSeeker')
-const Redis = require('../lib/Redis')
+const {beforeTestHelper, afterTestHelper} = require('../helpers/TestHelper')
 
 const input = {
   "big5_openness": 0.8830326747838335,
@@ -18,148 +17,38 @@ const input = {
   "value_conservation": 0.16470772102430248,
   "value_self_enhancement": 0.03444714630976964
 }
-const summary = require('../__mockData__/summary.json')
-const user1 = require('../__mockData__/user1.json')
-const user2 = require('../__mockData__/user2.json')
-const user3 = require('../__mockData__/user3.json')
-const user4 = require('../__mockData__/user4.json')
-const user5 = require('../__mockData__/user5.json')
-const user6 = require('../__mockData__/user6.json')
-const user7 = require('../__mockData__/user7.json')
-const user8 = require('../__mockData__/user8.json')
+
+jest.setTimeout(10000)
 
 describe('Testing Search Similarity Controller', () => {
-  beforeAll(async () => {
-    await JobSeeker.insertMany([
-      {
-        name: 'Satria Saputra',
-        location: 'Jakarta',
-        email: "halo@halo.com",
-        education: [
-          'Universitas Bina Nusantara'
-        ],
-        skills: [
-          'Node.js',
-          'Express.js'
-        ],
-        executive_summary: summary.data,
-        personality_insight: JSON.stringify(user2),
-        password: "sdJAS87123jn"
-      },
-      {
-        name: 'Bima Ambien',
-        location: 'Bogor',
-        email: "halo@halo.com",
-        education: [
-          'Institut Pertanian Bogor'
-        ],
-        skills: [
-          'Node.js',
-          'Express.js'
-        ],
-        executive_summary: summary.data,
-        personality_insight: JSON.stringify(user3),
-        password: "sdJAS87123jn"
-      },
-      {
-        name: 'Doni Alamanda',
-        location: 'Jakarta',
-        email: "halo@halo.com",
-        education: [
-          'Universitas Bina Nusantara'
-        ],
-        skills: [
-          'Node.js',
-          'Express.js'
-        ],
-        executive_summary: summary.data,
-        personality_insight: JSON.stringify(user4),
-        password: "sdJAS87123jn"
-      },
-      {
-        name: 'Crystal Clear',
-        location: 'Jakarta',
-        email: "halo@halo.com",
-        education: [
-          'Universitas Bina Nusantara'
-        ],
-        skills: [
-          'Node.js',
-          'Express.js'
-        ],
-        executive_summary: summary.data,
-        personality_insight: JSON.stringify(user5),
-        password: "sdJAS87123jn"
-      },
-      {
-        name: 'Cikita Medeni',
-        location: 'Jakarta',
-        email: "halo@halo.com",
-        education: [
-          'Universitas Bina Nusantara'
-        ],
-        skills: [
-          'Node.js',
-          'Express.js'
-        ],
-        executive_summary: summary.data,
-        personality_insight: JSON.stringify(user6),
-        password: "sdJAS87123jn"
-      },
-      {
-        name: 'Agnes Monikah',
-        location: 'Jakarta',
-        email: "halo@halo.com",
-        education: [
-          'Universitas Bina Nusantara'
-        ],
-        skills: [
-          'Node.js',
-          'Express.js'
-        ],
-        executive_summary: summary.data,
-        personality_insight: JSON.stringify(user7),
-        password: "sdJAS87123jn"
-      },
-      {
-        name: 'Maria Ozawi',
-        location: 'Jakarta',
-        email: "halo@halo.com",
-        education: [
-          'Universitas Bina Nusantara'
-        ],
-        skills: [
-          'Node.js',
-          'Express.js'
-        ],
-        executive_summary: summary.data,
-        personality_insight: JSON.stringify(user8),
-        password: "sdJAS87123jn"
-      },
-    ])
+  beforeAll(async (done) => {
+    await beforeTestHelper()
+    done()
   })
 
-  afterAll(async () => {
-    await JobSeeker.remove({})
-    await Redis.flushall()
+  afterAll(async (done) => {
+    await afterTestHelper()
+    done()
   })
 
-  test('Test Finding Similarity Value', () => {
+  test('Test Finding Similarity Value', (done) => {
     return request(app)
       .post('/search_personality')
       .send(input)
       .then(response => {
         expect(response.statusCode).toBe(200)
         expect(response.body).toHaveLength(7)
+        done()
       })
   })
-  test('Test Finding Similarity Value with specified limit', () => {
+  test('Test Finding Similarity Value with specified limit', (done) => {
     return request(app)
       .post('/search_personality')
       .send({...input, min_criteria: 0.56})
       .then(response => {
         expect(response.statusCode).toBe(200)
         expect(response.body).toHaveLength(5)
+        done()
       })
   })
 })
