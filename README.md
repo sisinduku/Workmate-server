@@ -1,7 +1,7 @@
 # Workmate
 [![Build Status](https://travis-ci.org/sisinduku/workmate-server.svg?branch=merge-with-search-personlity)](https://travis-ci.org/sisinduku/workmate-server)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/90f92f59c47730959d03/test_coverage)](https://codeclimate.com/github/sisinduku/workmate-server/test_coverage)
-[![Maintainability](https://api.codeclimate.com/v1/badges/90f92f59c47730959d03/maintainability)](https://codeclimate.com/github/sisinduku/workmate-server/maintainability)
+[![Test Coverage](https://cdn.rawgit.com/sisinduku/workmate-server/master/https://api.codeclimate.com/v1/badges/90f92f59c47730959d03/test_coverage.svg?sanitize=true)](https://codeclimate.com/github/sisinduku/workmate-server/test_coverage)
+[![Maintainability](https://cdn.rawgit.com/sisinduku/workmate-server/master/https://api.codeclimate.com/v1/badges/90f92f59c47730959d03/maintainability.svg?sanitize=true)](https://codeclimate.com/github/sisinduku/workmate-server/maintainability)
 
 This application is a platform for a employer to find candidate of employee according to required criteria base on a personality insight. To using this application, a job seeker can input biodata and executive summry. Base on biodata and executive summary then application will be a analyze it, then show the result. The result of the analysis is oppenness, extraversion, agreeableness, conscientiousness, curiousity, ideal, challange, practicality, stimulation, helping other, tradition, achievment
 
