@@ -24,7 +24,7 @@ yarn dev
 ```
 
 # GraphQL End Point
-You access GraphQL in
+You can access GraphQL in
 
 `localhost:3000/graphql`
 
